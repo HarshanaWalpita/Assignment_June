@@ -1,8 +1,8 @@
-require("dotenv").config({path: "./config.env"});
-const express = require('express');
-const errorHandler = require("./middlewares/error");
+require("dotenv").config({path: "./config.env"}); // import env file
+const express = require('express'); // require express
+const errorHandler = require("./middlewares/error"); // require error handler
 
-const app = express();
+const app = express(); // use express
 
 // Middleware
 app.use(express.json());

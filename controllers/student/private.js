@@ -1,5 +1,6 @@
 const Student = require("../../models/students");
 
+// student view modules
 exports.getModules = async(req,res, next) =>{
     try {
 
@@ -17,6 +18,7 @@ exports.getModules = async(req,res, next) =>{
     }
 }
 
+// student execute modules
 exports.getExecuteModules = async(req,res,next) =>{
     try {
 

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 const ErrorResponse = require("../utils/errorResponse");
 
+// validate student when login
 exports.protect = async (req, res, next) =>{
     let token;
 

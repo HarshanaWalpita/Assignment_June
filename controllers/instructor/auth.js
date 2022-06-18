@@ -1,6 +1,7 @@
 const Instructor = require("../../models/users");
 const ErrorResponse = require("../../utils/errorResponse");
 
+// login for instructor
 exports.login = async(req, res, next) => {
     const {name, password} = req.body;
 

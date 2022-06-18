@@ -1,11 +1,10 @@
 const ErrorResponse = require("../utils/errorResponse");
 
+// error handling part
 const errorHandler = (err, req, res, next) =>{
-    let error = {...err}    // err.message, err.name, err.code
+    let error = {...err} 
 
     error.message = err.message;
-
-    //console.log(err);
 
     if (err.code === 11000) {
         const message = "Duplicate field value enter";

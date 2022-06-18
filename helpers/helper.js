@@ -1,6 +1,7 @@
 const fs = require('fs');
 const jwt = require("jsonwebtoken");
 
+// get next id from array
 const getNewId = (array) => {
     if (array.length > 0) {
         return array[array.length - 1].id + 1
@@ -9,8 +10,10 @@ const getNewId = (array) => {
     }
 }
 
+// get date
 const newDate = () => new Date().toString()
 
+// check whether id exixts in the array 
 function mustBeInArray(array, id) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => r.id == id)
@@ -24,6 +27,7 @@ function mustBeInArray(array, id) {
     })
 }
 
+// check whether name exists in the array
 function mustNotBeInUsers(array, name) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => (r.name === name))
@@ -39,6 +43,7 @@ function mustNotBeInUsers(array, name) {
     })
 }
 
+// check whether username and password are exists
 function mustBeInUsers(array, name, password) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => (r.name === name && r.password === password))
@@ -52,6 +57,7 @@ function mustBeInUsers(array, name, password) {
     })
 }
 
+// get module enums
 function hasModules(array) {
     return new Promise((resolve, reject) =>{
         const row = array.map(r => r.moduleEnum)
@@ -65,6 +71,7 @@ function hasModules(array) {
     })
 }
 
+// get module enums related to student name from class file
 function getStudentModules(array, stuName) {
     return new Promise((resolve, reject) =>{
         const row = array.filter((item) => {
@@ -80,6 +87,7 @@ function getStudentModules(array, stuName) {
     })
 }
 
+// get module enums in the class
 function getExecuteModule(array, className) {
     return new Promise((resolve, reject) =>{
         const row = array.filter(r => r.className == className)
@@ -93,6 +101,7 @@ function getExecuteModule(array, className) {
     })
 }
 
+// get module enums in the class related to student username
 function getExecuteModuleForStudents(array, className, stuName) {
     return new Promise((resolve, reject) =>{
         const classRow = array.filter(r => r.className == className)
@@ -109,6 +118,7 @@ function getExecuteModuleForStudents(array, className, stuName) {
     })
 }
 
+// check whether class name is duplicated
 function mustNotBeInClass(array, className) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => (r.className === className))
@@ -124,10 +134,12 @@ function mustNotBeInClass(array, className) {
     })
 }
 
+// get token using secret key
 function getToken(id) {
     return jwt.sign({ id: id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
 }
 
+// write data to relevant class and user files
 function writeJSONFile(filename, content) {
     fs.writeFileSync(filename, JSON.stringify(content), 'utf8', (err) => {
         if (err) {
@@ -136,6 +148,7 @@ function writeJSONFile(filename, content) {
     })
 }
 
+// export functions
 module.exports = {
     getNewId,
     newDate,

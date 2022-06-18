@@ -53,25 +53,11 @@ function genarateToken(id) {
     })
 }
 
-function getClassModules(){
-    return new Promise((resolve, reject) =>{
-        helper.hasModules(classModules).then(classModule => resolve(classModule)).catch(err => reject(err))
-    })
-}
-
-function executeModule(className){
-    return new Promise((resolve, reject) =>{
-        helper.getExecuteModule(classModules, className).then(classModule => resolve(classModule)).catch(err => reject(err))
-    })
-}
-
 module.exports = {
     insertUser,
     findByID,
     findOne,
     genarateToken,
     findDuplicateUserFromArray,
-    findDuplicateUser,
-    getClassModules,
-    executeModule
+    findDuplicateUser
 }

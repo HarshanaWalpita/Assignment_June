@@ -13,6 +13,8 @@ exports.insertClassModule = async (req, res, next) => {
 
         _ = await Student.insertBulkUsers(studentArray);
 
+        _ = await ClassModule.findDuplicateClass(className);
+
         const students = studentArray.map(function (stu) {
             delete stu.password;
             return stu;
@@ -33,7 +35,7 @@ exports.insertClassModule = async (req, res, next) => {
 exports.getModules= async(req,res, next) =>{
     try {
 
-        const modules = await Instructor.getClassModules();
+        const modules = await ClassModule.getClassModules();
 
         return res.status(200).json({
             success: true,

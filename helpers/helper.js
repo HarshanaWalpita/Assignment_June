@@ -80,9 +80,9 @@ function getStudentModules(array, stuName) {
     })
 }
 
-function getExecuteModule(array, classname) {
+function getExecuteModule(array, className) {
     return new Promise((resolve, reject) =>{
-        const row = array.filter(r => r.className == classname)
+        const row = array.filter(r => r.className == className)
         if (row.length == 0) {
             reject({
                 message: 'Modules not found',
@@ -93,9 +93,9 @@ function getExecuteModule(array, classname) {
     })
 }
 
-function getExecuteModuleForStudents(array, classname, stuName) {
+function getExecuteModuleForStudents(array, className, stuName) {
     return new Promise((resolve, reject) =>{
-        const classRow = array.filter(r => r.className == classname)
+        const classRow = array.filter(r => r.className == className)
         const row = classRow.filter((item) => {
             return (item.students.some(stu=>stu.name == stuName))
         }).map(r => r.moduleEnum)
@@ -106,6 +106,21 @@ function getExecuteModuleForStudents(array, classname, stuName) {
             })
         }
         resolve(row)
+    })
+}
+
+function mustNotBeInClass(array, className) {
+    return new Promise((resolve, reject) => {
+        const row = array.find(r => (r.className === className))
+        if (!row) {
+            resolve('resolved');
+        }
+        else{
+            reject({
+                statusCode: 404,
+                message: 'Duplicate Class is found'
+            })
+        }
     })
 }
 
@@ -132,5 +147,6 @@ module.exports = {
     hasModules,
     getStudentModules,
     getExecuteModule,
-    getExecuteModuleForStudents
+    getExecuteModuleForStudents,
+    mustNotBeInClass
 }

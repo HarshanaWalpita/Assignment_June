@@ -20,6 +20,27 @@ function insertClass(newClassModule) {
     })
 }
 
+function findDuplicateClass(className) {
+    return new Promise((resolve, reject) =>{
+        helper.mustNotBeInClass(classModule, className).then(clsModule => resolve(clsModule)).catch(err => reject(err))
+    })
+}
+
+function getClassModules(){
+    return new Promise((resolve, reject) =>{
+        helper.hasModules(classModules).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
+function executeModule(className){
+    return new Promise((resolve, reject) =>{
+        helper.getExecuteModule(classModules, className).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
 module.exports = {
-    insertClass
+    insertClass,
+    findDuplicateClass,
+    getClassModules,
+    executeModule
 }

@@ -1,5 +1,4 @@
 const Instructor = require("../../models/users");
-const ErrorResponse = require("../../utils/errorResponse");
 
 exports.insertInstructor = async(req, res, next) =>{
     try {
